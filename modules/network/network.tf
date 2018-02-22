@@ -130,3 +130,10 @@ resource "aws_route53_record" "test" {
   ttl = "300"
   records = ["${var.instance_public_ip}"]
 }
+
+# TODO: add elastic load bancer group for Rancher Host instances?
+# ELB
+# TODO: create autoscaling group
+# Auto Scaling group
+
+
