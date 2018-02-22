@@ -7,3 +7,4 @@ variable "private_key_path" {}
 variable "key_name" {}
 variable "domain_name" {}
 variable "delegation_set" {}
+variable "route53_zone_id" {}

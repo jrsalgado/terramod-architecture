@@ -124,7 +124,7 @@ resource "aws_security_group" "Site1-sg" {
 # }
 
 resource "aws_route53_record" "test" {
-  zone_id = "Z5G1INAEUT75"
+  zone_id  = "${var.route53_zone_id}"
   name = "test.${var.domain_name}.com"
   type = "A"
   ttl = "300"

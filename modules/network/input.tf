@@ -5,3 +5,4 @@ variable "public_key_path" {}
 variable "domain_name" {}
 variable "delegation_set" {}
 variable "instance_public_ip" {}
+variable "route53_zone_id" {}

@@ -9,6 +9,7 @@ module "network" {
    domain_name      = "${var.domain_name}"
    delegation_set   = "${var.delegation_set}"
    instance_public_ip = "${module.instances.instance_public_ip}"
+   route53_zone_id  =   "${var.route53_zone_id}"
 }
 
 module "instances" {
