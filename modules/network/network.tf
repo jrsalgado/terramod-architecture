@@ -114,6 +114,23 @@ resource "aws_security_group" "Site1-sg" {
 
 }
 
+# Route53
+
+# TODO: manage route 53 zones automatically
+#primary zone
+# resource "aws_route53_zone" "primary" {
+#   name = "${var.domain_name}.com"
+#   delegation_set_id = "${var.delegation_set}"
+# }
+
+resource "aws_route53_record" "test" {
+  zone_id = "Z5G1INAEUT75"
+  name = "test.${var.domain_name}.com"
+  type = "A"
+  ttl = "300"
+  records = ["${var.instance_public_ip}"]
+}
+
 output "aws_security_group-Site1-id" {
   value = "${aws_security_group.Site1-sg.id}"
 }

@@ -6,6 +6,9 @@ module "network" {
    aws_region       = "${var.aws_region}"
    key_name         = "${var.key_name}"
    public_key_path  = "${var.public_key_path}"
+   domain_name      = "${var.domain_name}"
+   delegation_set   = "${var.delegation_set}"
+   instance_public_ip = "${module.instances.instance_public_ip}"
 }
 
 module "instances" {
