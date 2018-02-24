@@ -31,3 +31,11 @@ terraform apply -var-file=envs/test/terraform.tfvars -target=module.rancher envs
 ```
 terraform apply -var-file=envs/test/terraform.tfvars -target=module.rancher_hosts envs/test
 ```
+# run and wait
+```
+# boostrap network and rancher server
+docker run -it --rm -v $PWD:/usr/terransible --env-file private/env.list  jrsalgado/terraform:latest apply -auto-approve -var-file=envs/test/terraform.tfvars -target=module.network envs/test
+
+# set rancher hosts and app stack
+./rancherConfScheduler.sh
+```
