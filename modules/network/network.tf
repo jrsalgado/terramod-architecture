@@ -63,6 +63,7 @@ resource "aws_internet_gateway" "Site1-igw" {
 }
 
 # Security Group
+  #Rancher server
 resource "aws_security_group" "Site1-sg" {
   name        = "Site1 Rancher Server sg"
   description = "Rancher Server sg"
@@ -109,6 +110,74 @@ resource "aws_security_group" "Site1-sg" {
     from_port   = 500
     to_port     = 500
     protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+}
+
+  #Rancher Hosts
+
+resource "aws_security_group" "RancherHost-sg" {
+  name        = "Site1 Rancher Host sg"
+  description = "Rancher Host sg"
+  vpc_id      = "${aws_vpc.Site1-vpc1.id}"
+
+  # Internet egress
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
+  # Internet ingress
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Internet ingress
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # SSH ingress
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # TODO: limit access to rancher Host only
+  ingress {
+    from_port   = 2376
+    to_port     = 2378
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # TODO: limit access to rancher Host only
+  ingress {
+    from_port   = 4500
+    to_port     = 4500
+    protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # TODO: limit access to rancher Host only
+  ingress {
+    from_port   = 500
+    to_port     = 500
+    protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

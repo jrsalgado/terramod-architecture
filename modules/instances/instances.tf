@@ -13,9 +13,6 @@ resource "aws_instance" "rancherServer" {
   key_name = "${var.aws_key_name_id}"
   vpc_security_group_ids = ["${var.security_group_id}"]
   subnet_id = "${var.subnet_id}"
-# FIXME: import this
-#   depends_on = ["aws_internet_gateway.gw"]
-
 
   provisioner "remote-exec" {
     inline = [ 
@@ -28,4 +25,7 @@ resource "aws_instance" "rancherServer" {
       private_key  = "${file(var.private_key_path)}"
     }
   }
+
+  # Runs Rancher Configurations provider
+  # TODO: use a provisioner tool
 }
